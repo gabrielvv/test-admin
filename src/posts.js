@@ -1,6 +1,7 @@
 import React from 'react'
 import {
     Edit,
+    Filter,
     SimpleForm,
     List,
     Datagrid,
@@ -13,8 +14,17 @@ import {
     Create
 } from 'react-admin'
 
+const PostFilter = (props) => (
+    <Filter {...props}>
+        <TextInput label="Search" source="q" alwaysOn />
+        <ReferenceInput label="User" source="userId" reference="users" allowEmpty >
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+    </Filter>
+)
+
 export const PostList = props => (
-    <List {...props}>
+    <List {...props} filters={<PostFilter />}>
         <Datagrid rowClick="edit">
             <TextField source="id" />
             <ReferenceField source="userId" reference="users">
